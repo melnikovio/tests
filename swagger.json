@@ -53,6 +53,7 @@
         "operationId": "GetDeviceById",
         "parameters": [
           {
+            "type": "string",
             "description": "string representing identification number of device",
             "name": "id",
             "in": "path",
@@ -89,6 +90,7 @@
         "operationId": "GetDeviceAttributes",
         "parameters": [
           {
+            "type": "string",
             "description": "string representing identification number of device",
             "name": "id",
             "in": "path",
@@ -124,18 +126,21 @@
         "operationId": "FindEventsByInterval",
         "parameters": [
           {
+            "type": "string",
             "description": "string representing identification number of device",
             "name": "id",
             "in": "path",
             "required": true
           },
           {
+            "type": "string",
             "description": "string representing datetime by standard ISO 8601(https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14)",
             "name": "dateFrom",
             "in": "path",
             "required": true
           },
           {
+            "type": "string",
             "description": "string representing datetime by standard ISO 8601(https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14)",
             "name": "dateTo",
             "in": "path",
@@ -169,6 +174,7 @@
         "operationId": "UpdateEvent",
         "parameters": [
           {
+            "type": "string",
             "description": "string representing identification number of device",
             "name": "id",
             "in": "path",
@@ -209,6 +215,7 @@
         "operationId": "CreateEventOnDevice",
         "parameters": [
           {
+            "type": "string",
             "description": "string representing identification number of device",
             "name": "id",
             "in": "path",
@@ -248,12 +255,14 @@
         "operationId": "FindEventById",
         "parameters": [
           {
+            "type": "string",
             "description": "string representing identification number of device",
             "name": "id",
             "in": "path",
             "required": true
           },
           {
+            "type": "string",
             "description": "string representing identification number of event",
             "name": "eventId",
             "in": "path",
@@ -288,12 +297,14 @@
         "operationId": "DeleteEvent",
         "parameters": [
           {
+            "type": "string",
             "description": "string representing identification number of device",
             "name": "id",
             "in": "path",
             "required": true
           },
           {
+            "type": "string",
             "description": "string representing identification number of event",
             "name": "eventId",
             "in": "path",
