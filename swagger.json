@@ -223,7 +223,7 @@
           },
           {
             "description": "event to update",
-            "name": "body",
+            "name": "event",
             "in": "body",
             "required": true,
             "schema": {
