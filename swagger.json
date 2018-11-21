@@ -1,0 +1,487 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "description": "API Device Service Himprom Manual Input",
+    "title": "API Device Service",
+    "version": "1.0.0"
+  },
+  "basePath": "/api/v1",
+  "paths": {
+    "/devices": {
+      "get": {
+        "description": "Returns all available devices",
+        "tags": [
+          "Devices"
+        ],
+        "summary": "Returns all devices",
+        "operationId": "Devices",
+        "responses": {
+          "200": {
+            "description": "Devices succefully found",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Device"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/devices/{id}": {
+      "get": {
+        "description": "Returns device requested by Id",
+        "tags": [
+          "Devices"
+        ],
+        "summary": "Returns device by Id",
+        "operationId": "GetDeviceById",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "string representing identification number of device",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Device succefully found",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Device not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/devices/{id}/attributes": {
+      "get": {
+        "description": "Returns all available attributes of device",
+        "tags": [
+          "Devices"
+        ],
+        "summary": "Returns device attributes",
+        "operationId": "GetDeviceAttributes",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "string representing identification number of device",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Attributes succefully found",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Attribute"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/devices/{id}/events": {
+      "get": {
+        "description": "Returns events created in interval",
+        "tags": [
+          "Events"
+        ],
+        "summary": "Returns events created in interval",
+        "operationId": "FindEventsByInterval",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "string representing identification number of device",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "string representing datetime by standard ISO 8601(https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14)",
+            "name": "dateFrom",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "string representing datetime by standard ISO 8601(https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14)",
+            "name": "dateTo",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Events succefully found",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Event"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "put": {
+        "description": "Updates an existing event",
+        "tags": [
+          "Events"
+        ],
+        "summary": "Updates an existing event",
+        "operationId": "UpdateEvent",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "string representing identification number of device",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "event to update",
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Event"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event succefully updated"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Event not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "post": {
+        "description": "Creates new event",
+        "tags": [
+          "Events"
+        ],
+        "summary": "Creates new event",
+        "operationId": "CreateEventOnDevice",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "string representing identification number of device",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "event to update",
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Event"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event succefully created"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/devices/{id}/events/{eventId}": {
+      "get": {
+        "description": "Returns event by Id",
+        "tags": [
+          "Events"
+        ],
+        "summary": "Returns event by Id",
+        "operationId": "FindEventById",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "string representing identification number of device",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "string representing identification number of event",
+            "name": "eventId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event succefully found",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Event"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Event not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete event by Id",
+        "tags": [
+          "Events"
+        ],
+        "summary": "Delete event by Id",
+        "operationId": "DeleteEvent",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "string representing identification number of device",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "string representing identification number of event",
+            "name": "eventId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event succefully deleted"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Event not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/ping": {
+      "get": {
+        "description": "Returns pong",
+        "tags": [
+          "EdgeX"
+        ],
+        "summary": "EdgeX health API",
+        "operationId": "Ping",
+        "responses": {
+          "200": {
+            "description": "pong",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Attribute": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "Имя атрибута для отображения в таблице",
+          "type": "string",
+          "x-go-name": "DisplayName"
+        },
+        "id": {
+          "description": "Идентификатор атрибута",
+          "type": "string",
+          "x-go-name": "Id"
+        },
+        "limits": {
+          "$ref": "#/definitions/Limits"
+        },
+        "precision": {
+          "description": "Точность (знаков после запятой)",
+          "type": "number",
+          "format": "float",
+          "x-go-name": "Precision"
+        },
+        "required": {
+          "description": "Флаг необходимости ввода данных",
+          "type": "boolean",
+          "x-go-name": "Required"
+        },
+        "type": {
+          "description": "Тип данных",
+          "type": "string",
+          "x-go-name": "Type"
+        }
+      },
+      "x-go-package": "edgex/device-manual-input/api/model"
+    },
+    "AttributeValue": {
+      "type": "object",
+      "properties": {
+        "attributeId": {
+          "description": "Идентификатор атрибута",
+          "type": "string",
+          "x-go-name": "AttributeId"
+        },
+        "value": {
+          "description": "Значение",
+          "type": "string",
+          "x-go-name": "Value"
+        }
+      },
+      "x-go-package": "edgex/device-manual-input/api/model"
+    },
+    "ConditionType": {
+      "description": "Available values\nequal: value must be equal\nnotequal: value must be not equal\nless: value must be less\nlessorequal: value must be less or equal\ngreater: value must be greater\ngreaterorequal: value must be greater or equal",
+      "type": "string",
+      "x-go-package": "edgex/device-manual-input/api/model"
+    },
+    "Device": {
+      "type": "object",
+      "properties": {
+        "fullname": {
+          "description": "Полное наименование устройства",
+          "type": "string",
+          "x-go-name": "FullName"
+        },
+        "id": {
+          "description": "Идентификатор устройства",
+          "type": "string",
+          "x-go-name": "Id"
+        },
+        "name": {
+          "description": "Краткое наименование устройства (вкладка)",
+          "type": "string",
+          "x-go-name": "Name"
+        }
+      },
+      "x-go-package": "edgex/device-manual-input/api/model"
+    },
+    "Event": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Идентификатор события",
+          "type": "string",
+          "x-go-name": "Id"
+        },
+        "timestamp": {
+          "description": "Временная метка. Дата сериализуется/десериализуется согласно стандарта ISO 8601(https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14)",
+          "type": "string",
+          "x-go-name": "Timestamp"
+        },
+        "values": {
+          "description": "Значения атрибутов записи",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AttributeValue"
+          },
+          "x-go-name": "Values"
+        }
+      },
+      "x-go-package": "edgex/device-manual-input/api/model"
+    },
+    "Limits": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "Описание ограничения",
+          "type": "string",
+          "x-go-name": "DisplayName"
+        },
+        "hi": {
+          "description": "Верхняя граница",
+          "type": "number",
+          "format": "double",
+          "x-go-name": "Hi"
+        },
+        "hiCondition": {
+          "$ref": "#/definitions/ConditionType"
+        },
+        "lo": {
+          "description": "Нижняя граница",
+          "type": "number",
+          "format": "double",
+          "x-go-name": "Lo"
+        },
+        "loCondition": {
+          "$ref": "#/definitions/ConditionType"
+        }
+      },
+      "x-go-package": "edgex/device-manual-input/api/model"
+    }
+  }
+}
