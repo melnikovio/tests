@@ -227,7 +227,6 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
               "$ref": "#/definitions/Event"
             }
           }
